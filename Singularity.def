@@ -45,7 +45,6 @@ From: ubuntu:20.04
     ln -s ./squashfs-root/AppRun ./casaviewer-x86_64.AppImage
 
 %runscript
-    /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/bin/casa "$@"
-
+    mpicasa -n 16 casa --pipeline 
 %files
     casa-6.4.1-12-pipeline-2022.2.0.64-py3.6.tar.xz /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64-py3.6.tar.xz
