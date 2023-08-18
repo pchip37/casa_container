@@ -24,21 +24,21 @@ From: ubuntu:22.04
     #The above casa installation contains three AppImage files
     #AppImages only work within singularity containers if they are unpacked
     #The following replaces the three packed AppImages with unpacked versions
-    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaplotms/__bin__/
+    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaplotms/__bin__/
     ./casaplotms-x86_64.AppImage --appimage-extract
-    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaplotms/__bin__/squashfs-root/
+    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaplotms/__bin__/squashfs-root/
     rm ./casaplotms-x86_64.AppImage
     ln -s ./squashfs-root/AppRun ./casaplotms-x86_64.AppImage
 
-    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaplotserver/__bin__/
+    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaplotserver/__bin__/
     ./casaplotserver-x86_64.AppImage --appimage-extract
-    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaplotserver/__bin__/squashfs-root/
+    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaplotserver/__bin__/squashfs-root/
     rm ./casaplotserver-x86_64.AppImage
     ln -s ./squashfs-root/AppRun ./casaplotserver-x86_64.AppImage
 
-    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaviewer/__bin__/
+    cd /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaviewer/__bin__/
     ./casaviewer-x86_64.AppImage --appimage-extract
-    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.8/site-packages/casaviewer/__bin__/squashfs-root
+    chmod -R 755 /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/lib/py/lib/python3.6/site-packages/casaviewer/__bin__/squashfs-root
     rm ./casaviewer-x86_64.AppImage
     ln -s ./squashfs-root/AppRun ./casaviewer-x86_64.AppImage
 
