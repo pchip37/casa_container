@@ -13,8 +13,8 @@ From: ubuntu:22.04
     mkdir /home/casa
 
     # Install necessary tools and libraries
-    apt update
-    apt install -y wget xz-utils fuse xserver-xorg-dev sqlite libxext-dev libx11-6 libfontconfig1 libsm-dev xserver-xorg libgtk-3-dev libfuse2
+    #apt update
+    apt install -y wget xz-utils fuse xserver-xorg-dev sqlite libxext-dev libx11-6 libfontconfig1 libsm-dev xserver-xorg libgtk-3-dev
     rm -rf /var/lib/apt/lists/*
     cd /usr/local
     # Download and extract casa-pipeline software (assuming it's available at the build location)
@@ -43,7 +43,7 @@ From: ubuntu:22.04
     ln -s ./squashfs-root/AppRun ./casaviewer-x86_64.AppImage
 
 %runscript
-    exec modprobe -v fuse &&  /casa-6.4.1-12-pipeline-2022.2.0.64/bin/casa "$@"
+    /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64/bin/casa "$@"
 
 %files
     casa-6.4.1-12-pipeline-2022.2.0.64-py3.6.tar.xz /usr/local/casa-6.4.1-12-pipeline-2022.2.0.64-py3.6.tar.xz
