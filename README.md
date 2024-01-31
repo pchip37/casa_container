@@ -1,4 +1,3 @@
-
 # CASA Container
 
 This repository contains the necessary files to build containerized environments for running different versions of [CASA](https://casadocs.readthedocs.io/en/stable/index.html).
@@ -54,14 +53,32 @@ If your current working directory (PWD) is different from `$HOME`, you can use t
 singularity exec --bind $PWD:$PWD --pwd $(pwd) casa.sif your_command
 ```
 
-## Best Practices for Running Alternative Commands
-
-### For executing the CASA VLA pipeline on HPC using batch-job
+### Executing the CASA VLA pipeline on HPC using batch-job
 
 The `-c` flag indicates the way to run an external script using CASA. `xvfb-run` is a typical execution command sent to HPC scheduler (i.e. SLURM) in the batch-job shell script, where `-a` can be appended if HPC uses Ubuntu as a base OS. So, the entire command now will be:
 
 ```bash
 singularity exec --pwd /data --bind [PATH_DATA_DIR]:/data casa_6.4.1_with_xvfb.sif xvfb-run -a mpicasa casa --pipeline -c CASA_VLA_pipescript.py
+```
+
+#### Batch-job submisssion on CHEOPS: Example
+Job allocation and utility management are done using SLURM routine on CHEOPS. When we submit a batch-job, we need to make sure that we provide the necessary requirements from our task/program's side to the CHEOPS in the form of a shell script (as shown below).
+
+```bash
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --partition=riechers-exclusive
+#SBATCH --mail-type=ALL
+#SBATCH --no-requeue
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=128GB
+#SBATCH --time=0-7:00:00
+#SBATCH -J casatest
+#!SBATCH -o casa_vzgal_001_helms45_trial2-%j.out   # Write the standard output to file named 'jMPItest-<job_number>.out'
+#!SBATCH -e casa_vzgal_001_helms45_trial2-%j.err   # Write the standard error to file named 'jMPItest-<job_number>.err'
+
+#! Enter the script to run here (e.g. python3 helloworld.py)
 ```
 
 ### Running Custom Commands
