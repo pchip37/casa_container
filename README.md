@@ -45,6 +45,14 @@ Singularity automatically mounts the current working directory (PWD) inside the 
 singularity exec --pwd $(pwd) casa_6.4.1.sif your_command
 ```
 
+### Running Custom Commands
+
+You can run any command inside the container by prefixing it with `singularity exec`:
+
+```bash
+singularity exec casa_6.4.1.sif your_command
+```
+
 ### Mounting PWD to Container and Setting as Initial Working Directory
 
 If your current working directory (PWD) is different from `$HOME`, you can use the `--bind` and `--pwd` flags together to both mount the PWD and set it as the initial working directory:
@@ -79,12 +87,4 @@ Job allocation and utility management are done using SLURM routine on CHEOPS. Wh
 #!SBATCH -e casa_vzgal_001_helms45_trial2-%j.err   # Write the standard error to file named 'jMPItest-<job_number>.err'
 
 #! Enter the script to run here (e.g. python3 helloworld.py)
-```
-
-### Running Custom Commands
-
-You can run any command inside the container by prefixing it with `singularity exec`:
-
-```bash
-singularity exec casa_6.4.1.sif your_command
 ```
