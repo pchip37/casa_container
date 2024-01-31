@@ -17,14 +17,15 @@ The Makefile contains several targets for building and running the CASA containe
 ### General
 
 - `make all`: Build both 6.4.1 and 6.2.1 Singularity images.
+- `bake xvfb` (virtual buffer) into the CASA Singularity container image (e.g. in Docker files, add the installation of xvfb) for its usage on HPC. The reason to include `xvfb` is that `CASA/plotms` on Linux needs X11 to get the plots done, w/o which it may not create all the necessary output plots as CASA pipeline result. 
 
 ### CASA Version 6.4.1
 
-- `make casa_6.4.1.sif`: Build Singularity image for CASA 6.4.1.
+- `make casa_6.4.1.sif` or `make casa_6.4.1_with_xvfb.sif`: Build Singularity image for CASA 6.4.1 (w/o and with xvfb, respectively).
 
 ### CASA Version 6.2.1
 
-- `make casa_6.2.1.sif`: Build Singularity image for CASA 6.2.1.
+- `make casa_6.2.1.sif` or `make casa_6.2.1_with_xvfb.sif`: Build Singularity image for CASA 6.2.1 (w/o and with xvfb, respectively).
 
 ### Downloads
 
@@ -55,12 +56,12 @@ singularity exec --bind $PWD:$PWD --pwd $(pwd) casa.sif your_command
 
 ## Best Practices for Running Alternative Commands
 
-### Overriding the CASA Command
+### For executing the CASA VLA pipeline on HPC using batch-job
 
-To run an external script using CASA, you can use the `-c` flag like so:
+The `-c` flag indicates the way to run an external script using CASA. `xvfb-run` is a typical execution command sent to HPC scheduler (i.e. SLURM) in the batch-job shell script, where `-a` can be appended if HPC uses Ubuntu as a base OS. So, the entire command now will be:
 
 ```bash
-singularity exec casa_6.4.1.sif casa -c 'execfile("your_script.py")'
+singularity exec --pwd /data --bind [PATH_DATA_DIR]:/data casa_6.4.1_with_xvfb.sif xvfb-run -a mpicasa casa --pipeline -c CASA_VLA_pipescript.py
 ```
 
 ### Running Custom Commands
